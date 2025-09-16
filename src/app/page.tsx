@@ -1,103 +1,117 @@
-import Image from "next/image";
+"use client";
+
+import { motion, useScroll, useSpring } from "framer-motion";
+import { Header } from "../components/header";
+import { ImportantNote } from "../components/ImportantNote";
+import { ImageTutorialStep } from "../components/ImageTutorialStep";
+
+// NOTE: Ganti URL placeholder ini dengan path ke gambar yang sudah diunggah di folder /public
+const tutorialSteps = [
+	{
+		title: "Mulai Proses Verifikasi",
+		description:
+			"Kunjungi halaman penawaran Gemini untuk mahasiswa, lalu klik tombol 'Verifikasi kelayakan' untuk memulai.",
+		imageUrl: "/images/satu.jpg",
+	},
+	{
+		title: "Isi Data Diri",
+		description:
+			"Lengkapi formulir verifikasi dengan data yang valid, seperti negara, nama universitas, nama lengkap, tanggal lahir dan email domain kampus sesuai dengan data akademik kamu.",
+		imageUrl: "/images/dua.jpg",
+	},
+	{
+		title: "Verifikasi Melalui Portal Akademik",
+		description:
+			"Kamu akan diarahkan ke halaman verifikasi SheerID. Klik 'Masuk ke lembaga akademik saya' dan login menggunakan akun email kampusmu.",
+		imageUrl: "/images/empat.jpg",
+	},
+	{
+		title: "Tunggu Konfirmasi",
+		description:
+			"Setelah login, status verifikasimu mungkin akan 'Pending' untuk beberapa saat. Tunggu hingga prosesnya selesai dan kamu mendapatkan konfirmasi.",
+		imageUrl: "/images/enam.jpg",
+	},
+	{
+		title: "Klaim Penawaran Google AI Pro",
+		description:
+			"Setelah berhasil diverifikasi, klik tombol 'Dapatkan Google AI Pro' untuk melanjutkan ke tahap berlangganan.",
+		imageUrl: "/images/tujuh.jpg",
+	},
+	{
+		title: "Tambahkan Metode Pembayaran",
+		description:
+			"Pilih metode pembayaran yang akan digunakan. Ini diperlukan untuk aktivasi dan perpanjangan otomatis setelah masa gratis berakhir.",
+		imageUrl: "/images/sembilan.jpg",
+	},
+	{
+		title: "Berhasil Berlangganan!",
+		description:
+			"Selamat! Kamu sekarang sudah berlangganan Google One AI Pro. Kamu bisa mengelola langgananmu melalui pengaturan akun Google Play.",
+		imageUrl: "/images/sebelas.jpg",
+	},
+];
+
+const containerVariants = {
+	hidden: { opacity: 0 },
+	visible: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.15,
+		},
+	},
+};
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+	// Progress bar logic
+	const { scrollYProgress } = useScroll();
+	const scaleX = useSpring(scrollYProgress, {
+		stiffness: 140,
+		damping: 30,
+		restDelta: 0.001,
+	});
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	return (
+		<>
+			<motion.div
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				transition={{ duration: 0.6 }}
+				style={{ scaleX }}
+				aria-label='Progress membaca halaman'
+				className='fixed top-0 left-0 right-0 h-1 origin-left z-50 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500' />
+
+			<main className='min-h-screen p-4 sm:p-8'>
+				<div className='max-w-4xl mx-auto'>
+					<Header />
+
+					<motion.div
+						variants={containerVariants}
+						initial='hidden'
+						animate='visible'
+						className='mt-4'>
+						{tutorialSteps.map((step, index) => (
+							<ImageTutorialStep
+								key={index}
+								number={index + 1}
+								title={step.title}
+								description={step.description}
+								imageUrl={step.imageUrl}
+							/>
+						))}
+					</motion.div>
+
+					<ImportantNote />
+
+					<motion.footer
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true, amount: 0.3 }}
+						transition={{ duration: 0.6, ease: "easeOut" }}
+						className='text-center py-8 text-slate-500'>
+						<p>Dibuat Oleh Orang Ganteng Intelek &copy; 2025</p>
+					</motion.footer>
+				</div>
+			</main>
+		</>
+	);
 }

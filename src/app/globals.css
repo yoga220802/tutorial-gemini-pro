@@ -1,26 +1,64 @@
+/* Langsung tembak pake @import, cara modern di v4 */
 @import "tailwindcss";
 
+/* Definisi variabel warna untuk light & dark mode.
+  Ini basisnya, jadi gampang kalo mau bikin theming.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --background-rgb: 255 255 255;
+  /* Putih untuk light mode */
+  --foreground-rgb: 10 10 10;
+  /* Hitam untuk light mode */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background-rgb: 10 10 10;
+    /* #0A0A0A untuk dark mode */
+    --foreground-rgb: 203 213 225;
+    /* slate-300 untuk dark mode */
   }
 }
 
+/* Inject variabel kita ke config Tailwind secara 'inline'.
+  Gak perlu file tailwind.config.js lagi buat hal simpel.
+*/
+@theme {
+  --color-background: rgb(var(--background-rgb));
+  --color-foreground: rgb(var(--foreground-rgb));
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+  /* Font di-handle sama next/font di layout.tsx biar lebih optimal */
+}
+
+/* Kita balikin lagi gradasi kerennya, tapi khusus buat dark mode
+  biar light mode-nya tetep clean.
+*/
+@media (prefers-color-scheme: dark) {
+  body {
+    background-image: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.3), transparent);
+    background-repeat: no-repeat;
+  }
+}
+
+
+/* Custom scrollbar-nya kita pertahanin, ini detail kecil yang bikin premium */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(var(--background-rgb));
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4A5568;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #718096;
 }
