@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tutorial Gemini Pro
 
-## Getting Started
+Panduan interaktif & modern untuk membantu mahasiswa melakukan verifikasi dan mengaktifkan Google / Gemini (Google One AI Pro) dengan UI yang smooth, responsif, dan berfokus pada experience.
 
-First, run the development server:
+## ✨ Fitur Utama
+- Next.js 15 (App Router)
+- Tailwind CSS v4 (utility-first styling)
+- Framer Motion (animasi halus: scroll progress bar, reveal, hover, modal)
+- Fullscreen image modal (klik gambar langkah)
+- Scroll progress bar (indikator seberapa jauh halaman dibaca)
+- Komponen reusable (Header, Steps, ImportantNote, CodeBlock)
+- Aksesibilitas dasar (role, aria-label, Esc untuk tutup modal)
+- Konfigurasi gambar eksternal (placehold.co via remotePatterns)
 
+## 🚀 Demo Lokal
 ```bash
+# Install dependencies
+npm install
+
+# Jalankan mode development
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Buka di browser
+http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🗂 Struktur Direktori (ringkas)
+```text
+src/
+  app/
+    page.tsx          # Halaman utama tutorial
+    layout.tsx        # Root layout + metadata
+  components/
+    header.tsx
+    ImageTutorialStep.tsx
+    ImportantNote.tsx
+    TutorialStep.tsx
+    CodeBlock.tsx
+public/
+  images/             # Letakkan asset langkah (satu.jpg, dua.jpg, dst)
+next.config.js        # Konfigurasi remotePatterns gambar
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧩 Menambah / Mengubah Langkah
+Edit array tutorialSteps di: `src/app/page.tsx`
+```ts
+{
+  title: "Judul Langkah",
+  description: "Deskripsi jelas dan ringkas.",
+  imageUrl: "/images/nama-file.jpg"
+}
+```
+Pastikan file gambar ada di `public/images/`.  
+Gambar otomatis dianimasikan & mendukung fullscreen modal.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🎨 Kustomisasi Cepat
+| Hal | Lokasi | Catatan |
+|-----|--------|---------|
+| Warna gradasi judul | header.tsx | Ubah kelas `bg-gradient-to-r ...` |
+| Animasi kartu langkah | ImageTutorialStep.tsx | whileHover & variants |
+| Progress bar | page.tsx | Komponen motion.div fixed (scaleX) |
+| Metadata SEO | app/layout.tsx | Properti `metadata` |
+| Catatan penting | ImportantNote.tsx | Bisa tambah kartu baru (duplikasi motion.div) |
 
-## Learn More
+### Open Graph / SEO (opsional)
+Tambahkan di `layout.tsx`:
+```ts
+export const metadata = {
+  // ...existing
+  openGraph: { title: "...", description: "...", images: ["/og.png"] }
+};
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠 Skrip Penting
+```bash
+npm run dev      # Development
+npm run build    # Production build
+npm start        # Jalankan hasil build
+npm run lint     # (Jika ESLint ditambahkan)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Deploy
+Paling mudah: Vercel  
+1. Push repo ke GitHub  
+2. Import ke Vercel  
+3. Deploy (otomatis mendeteksi Next.js)  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Alternatif: Docker (tambahkan Dockerfile sendiri bila perlu).
 
-## Deploy on Vercel
+## ♿ Aksesibilitas
+- Modal bisa ditutup: klik overlay / tombol / Esc
+- Elemen interaktif punya aria-label
+- Progress bar hanya dekoratif (tidak mengganggu navigasi)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔍 Troubleshooting
+| Masalah | Solusi |
+|---------|--------|
+| Gambar tidak muncul | Pastikan path `/public/images/...` benar |
+| Modal tidak tertutup | Cek listener Escape & stopPropagation |
+| TypeScript error di animasi | Gunakan `Variants` + easing array (bukan string) |
+| Remote image blok | Tambahkan pola baru di `next.config.js` |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🧪 Ide Pengembangan Lanjut
+- Tambah dark/light toggle
+- Tambah i18n (ID / EN)
+- Ekspor PDF versi singkat
+- Tracking progress per user (localStorage)
+
+## 🧱 Teknologi
+Next.js • React • TypeScript • Tailwind CSS • Framer Motion • Lucide Icons
+
+## 🤝 Kontribusi
+Pull Request & issue welcome. Gunakan gaya kode yang konsisten.
+
+## 📄 Lisensi
+Gunakan bebas untuk belajar / modifikasi internal. Tambahkan file LICENSE bila ingin dipublikasikan.
+
+## 🔗 Referensi
+- https://nextjs.org
+- https://tailwindcss.com
+- https://www.framer.com/motion/
+
+Selamat membangun & semoga bermanfaat.
