@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 
 export function Header() {
+	const encodedUrl = "aHR0cHM6Ly9nc2FpZC5zaG9ydC5neS8xNTk="; // base64
+
 	return (
 		<motion.header
 			initial={{ opacity: 0, y: -20 }}
@@ -13,18 +15,21 @@ export function Header() {
 				Panduan Gemini Pro
 			</h1>
 			<p className='mt-6 text-lg text-slate-400 max-w-2xl mx-auto'>
-				{/* Link diperkuat agar sangat jelas bisa diklik */}
-				<motion.a
+				<motion.button
+					type='button'
+					role='link'
 					whileHover={{ scale: 1.06, y: -2 }}
 					whileTap={{ scale: 0.95 }}
-					href='https://gsaid.short.gy/159'
-					target='_blank'
-					rel='noopener noreferrer'
+					onClick={() =>
+						window.open(atob(encodedUrl), "_blank", "noopener,noreferrer")
+					}
+					onContextMenu={(e) => e.preventDefault()}
+					draggable={false}
 					className='group relative inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold tracking-wide text-sm md:text-base uppercase
 						bg-gradient-to-r from-purple-600/30 via-pink-500/20 to-red-500/30
 						text-purple-100 ring-1 ring-purple-500/40 hover:ring-pink-400/60
 						shadow-[0_0_0_0_rgba(236,72,153,0.35)] hover:shadow-[0_0_22px_4px_rgba(236,72,153,0.25)]
-						transition-all duration-300 backdrop-blur-sm'>
+						transition-all duration-300 backdrop-blur-sm select-none cursor-pointer'>
 					<span className='absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/0 via-pink-500/20 to-red-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
 					<span className='relative'>Mulai Pendaftaran Gemini Pro</span>
 					<span
@@ -33,7 +38,7 @@ export function Header() {
 						→
 					</span>
 					<span className='absolute -inset-px rounded-xl border border-pink-400/20 group-hover:border-pink-300/50 pointer-events-none' />
-				</motion.a>
+				</motion.button>
 			</p>
 		</motion.header>
 	);
