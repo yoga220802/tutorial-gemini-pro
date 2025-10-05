@@ -2,7 +2,6 @@
 
 import { Header } from "../../components/header";
 import { CodeBlock } from "../../components/CodeBlock";
-import { ImportantNote } from "../../components/ImportantNote";
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import { Wand2 } from "lucide-react";
@@ -84,8 +83,8 @@ export default function ShareGemPage() {
 							Bangun Tim AI Impianmu
 						</h2>
 						<p className='mt-4 text-lg text-slate-400 max-w-2xl mx-auto'>
-							Capek ngetik prompt panjang berulang-ulang? Simpan & gunakan 3 'asisten
-							pribadi' permanen di Gemini dengan fitur Custom Gems.
+							Capek ngetik prompt panjang berulang-ulang? Simpan & gunakan 3 &apos;asisten
+							pribadi&apos; permanen di Gemini dengan fitur Custom Gems.
 						</p>
 					</motion.section>
 
@@ -98,11 +97,11 @@ export default function ShareGemPage() {
 							Cara Menggunakan Gems Ini
 						</h3>
 						<ol className='mt-6 space-y-4 list-decimal list-inside text-slate-300'>
-							<li>Pilih salah satu persona di bawah dan klik tombol 'Copy Prompt'.</li>
+							<li>Pilih salah satu persona di bawah dan klik tombol &apos;Copy Prompt&apos;.</li>
 							<li>
 								Buka Gemini, klik foto profilmu, lalu pilih{" "}
-								<span className='font-bold text-slate-100'>'Custom instructions'</span>{" "}
-								(atau 'Petunjuk Khusus').
+								<span className='font-bold text-slate-100'>&apos;Custom instructions&apos;</span>{" "}
+								(atau &apos;Petunjuk Khusus&apos;).
 							</li>
 							<li>
 								<span className='font-bold text-slate-100'>Paste</span> seluruh prompt
